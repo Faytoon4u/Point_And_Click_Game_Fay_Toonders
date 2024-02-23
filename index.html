@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Point and click adventure</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div id="title">
+        <h1 id="mainTitle">something</h1>
+    </div>
+    <div id="gameWindow">
+        <!--Inventory box-->
+        <div id="inventoryBox" class="foreground">
+            <ul id="inventoryList">
+            </ul>
+        </div>
+        <!--dialog bar-->
+        <div id="dialogBar" class="foreground">
+            <div id="setMainDialog">
+                <div id="heroAvatar" class="foreground">
+                    <img src="img/mai" alt="hero avatar">
+
+                </div>
+                <div id="heroSpeech" class="foreground">
+
+                </div>
+                <div id="counterSpeech" class="foreground">
+
+                </div>
+                <div id="counterAvatar" class="foreground">
+
+                </div>
+            </div>
+        </div>
+        <!--Foreground elements-->
+        <div id="key" class="foreground"></div>
+        <div id="well" class="foreground"></div>
+        <div id="doorWizardHut" class="foreground"></div>
+
+        <div id="statue" class="foreground"></div>
+
+        <!--Main Character-->
+        <div id="hero" class="character">
+            <img src="img/main.gif" alt="hero character" id="heroImage">
+        </div>
+
+        <!--Background elements-->
+        <div id="tileMap" class="background">
+            <img src="img/tilemap1.jpg" alt="tileMap" draggable="false">
+        </div>
+
+    </div>
+</body>
+
+</html>
+<script src="js/main.js"></script>
