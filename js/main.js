@@ -4,6 +4,20 @@ let gameState = {
     "inventory": [],
     "coinPickedUp": false
 }
+
+
+if (Storage) {
+    if (localStorage.gamestate) {
+        // uses localStorage gamestate string and convert it into an object. then store it into gameState.
+        gameState =  JSon.pase(localStorage.gamestate); 
+
+    } else {
+        // convert local object variable to a string. then store it into localstorage
+        localStorage.setItem("gameState", JSon.stringify(gamestate))
+    }
+
+   
+}
 //Game window reference
 const gameWindow = document.getElementById("gameWindow");
 const inventoryList = document.getElementById("inventoryList");
