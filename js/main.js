@@ -1,19 +1,24 @@
+/// bugg
+// if you click on the chest more than ones before you are there you get more than 1 key
+
+
 document.getElementById("mainTitle").innerText = "Point and Click adventure game";
 // Game State
 let gameState = {
     "inventory": [],
-    "coinPickedUp": false
+    "coinPickedUp": false,
+    "keyPickedUp": false
 }
 
 
 if (Storage) {
-    if (localStorage.gamestate) {
+    if (localStorage.gameState) {
         // uses localStorage gamestate string and convert it into an object. then store it into gameState.
-        gameState =  JSon.pase(localStorage.gamestate); 
+        gameState =  JSON.parse(localStorage.gameState); 
 
     } else {
         // convert local object variable to a string. then store it into localstorage
-        localStorage.setItem("gameState", JSon.stringify(gamestate))
+        localStorage.setItem("gameState", JSON.stringify(gameState))
     }
 
    
@@ -59,6 +64,7 @@ gameWindow.onclick = function (e) {
                 console.log("pick up key")
                 document.getElementById("key").remove();
                 changeInventory('key', "add");
+                gameState.keyPickedUp = true
                 saveGameState(gameState);
                 break;
             case "well":
