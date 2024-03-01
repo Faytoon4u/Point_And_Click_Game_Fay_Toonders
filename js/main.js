@@ -59,6 +59,7 @@ gameWindow.onclick = function (e) {
                 console.log("pick up key")
                 document.getElementById("key").remove();
                 changeInventory('key', "add");
+                saveGameState(gameState);
                 break;
             case "well":
                 if (gameState.coinPickedUp == false) {
@@ -164,4 +165,9 @@ function hideMessage(targetBubble, targetSound) {
     targetSound.pause();
     targetBubble.innerText = "...";
     targetBubble.style.opacity = 0;
+
+}
+
+function saveGameState(gameState){
+    localStorage.gameState = JSON.stringify(gameState);
 }
