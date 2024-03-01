@@ -22,38 +22,47 @@
         <div id="dialogBar" class="foreground">
             <div id="setMainDialog">
                 <div id="heroAvatar" class="foreground">
-                    <img src="img/mai" alt="hero avatar">
-
+                    <img src="img/main.gif" alt="hero avatar">
                 </div>
-                <div id="heroSpeech" class="foreground">
-
+                <div id="heroSpeech" class="foreground speechBubble">
+                    ...
                 </div>
-                <div id="counterSpeech" class="foreground">
-
+                <div id="counterSpeech" class="foreground speechBubble">
+                    ...
                 </div>
                 <div id="counterAvatar" class="foreground">
-
+                    <img src="img/Bunny_sprite.jpg" alt="Counter avatar">
                 </div>
+                <div id="brownBar" class="background"></div>
             </div>
         </div>
         <!--Foreground elements-->
         <div id="key" class="foreground"></div>
         <div id="well" class="foreground"></div>
         <div id="doorWizardHut" class="foreground"></div>
-
         <div id="statue" class="foreground"></div>
 
         <!--Main Character-->
         <div id="hero" class="character">
-            <img src="img/main.gif" alt="hero character" id="heroImage">
+            <img src="img/main.gif" alt="hero charcater" id="heroImage">
         </div>
 
         <!--Background elements-->
         <div id="tileMap" class="background">
-            <img src="img/tilemap1.jpg" alt="tileMap" draggable="false">
+            <img src="img/tilemap1.jpg" alt="tilemap" draggable="false">
         </div>
 
     </div>
+
+    <audio id="heroAudio">
+        <source src="audio/Gibberish - Sound Effect_01.mp3">
+    </audio>
+
+    <audio id="counterAudio">
+        <source  src="audio/high pitch voice.mp3">
+    </audio>
+    
+
 </body>
 
 </html>
