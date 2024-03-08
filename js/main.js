@@ -1,7 +1,3 @@
-/// bugg
-// if you click on the chest more than ones before you are there you get more than 1 key
-
-
 document.getElementById("mainTitle").innerText = "Point and Click adventure game";
 // Game State
 let gameState = {
@@ -37,13 +33,16 @@ const sec = 1000;
 //Main Character
 const mainCharacter = document.getElementById("hero");
 const offsetCharacter = 16;
+const dog = document.getElementById("dog");
 
 //speech bubbles
 const heroSpeech = document.getElementById("heroSpeech");
 const counsterSpeech = document.getElementById("counterSpeech");
+const dogSpeech = document.getElementById("dogSpeech");
 //audio for dialog
 const heroAudio = document.getElementById("heroAudio");
 const counterAudio = document.getElementById("counterAudio");
+const dogAudio = document.getElementById("dogAudio");
 
 //avatar
 const counterAvatar = document.getElementById("counterAvatar");
@@ -66,7 +65,11 @@ gameWindow.onclick = function (e) {
     //TODO: calc offset based on character size
     //TODO: making dialog functionality
 
-    if (counterSpeech.style.opacity == 0 && heroSpeech.style.opacity == 0) {
+    if (
+        counsterSpeech.style.opacity == 0 &&
+       // dogSpeech.style.opacity == 0 &&
+        heroSpeech.style.opacity == 0
+      ) {
         if (e.target.id !== "heroImage") {
             mainCharacter.style.left = x - offsetCharacter + "px";
             mainCharacter.style.top = y - offsetCharacter + "px";
@@ -74,14 +77,25 @@ gameWindow.onclick = function (e) {
         switch (e.target.id) {
             case "key":
                 console.log("pick up key")
+
                 document.getElementById("key").remove();
+
                 changeInventory('key', "add",'chest');
+
                 gameState.keyPickedUp = true
+
                 saveGameState(gameState);
+
                 break;
+
+
+
+         
+           
+            break;
             case "well":
                 if (gameState.coinPickedUp == false) {
-                    changeInventory("coin", "add");
+                    changeInventory("coin", "add",'chest');
                     gameState.coinPickedUp = true;
                 } else {
                     console.log("There are no more coins in this well!");
@@ -109,20 +123,28 @@ gameWindow.onclick = function (e) {
                 setTimeout(function () { counterAvatar.style.opacity = 0; }, 16 * sec);
                 //console.log("hey you.. wanna know where the key is? It's by the graves.");
                 break;
-                case "chest":
-                    if (gameState.keyPickedUp) {
-                        console.log("open chest");
-                        changeInventory('treasure', "add");
-                        document.getElementById("chest").remove();
-                    } else {
-                        console.log("pick up key");
-                        document.getElementById("key").remove();
-                        gameState.keyPickedUp = true;
-                        saveGameState(gameState);
-                        changeInventory('key', "add"); // add key to inventory here
-                    }
-                    break;
-                    
+            case "dog":
+                showMessage(heroSpeech, "Hey a cute little doggie.", heroAudio);
+                setTimeout(function () {dogAvatar.style.opacity = 1; }, 4 * sec);
+                setTimeout(showMessage,0.1 * sec, dogSpeech,"woef woef woef ",
+                  dogAudio
+                );
+                setTimeout(
+                  showMessage,
+                  0.1 * sec,
+                  heroSpeech,
+                  "oh i think i scared him..",
+                  heroAudio
+                );
+                setTimeout(
+                showMessage,2 * sec,dogSpeech,"woef woef",dogAudio);
+                setTimeout(showMessage,3 * sec,heroSpeech,"now he is running away.",heroAudio);
+                setTimeout(function () {
+                  dogAvatar.style.opacity = 0;
+                  dog.style.opacity = 0;
+                }, 2 * sec);
+
+               
             default:
                 break;
         }
@@ -229,3 +251,4 @@ function hideMessage(targetBubble, targetSound) {
 function saveGameState(gameState){
     localStorage.gameState = JSON.stringify(gameState);
 }
+

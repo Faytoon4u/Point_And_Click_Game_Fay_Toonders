@@ -60,12 +60,29 @@ body {
     right: 72px;
     opacity: 0;
 }
+#doggieSpeech{
+    width: 300px;
+    background-color: #FFFFFF;
+    top: 0px;
+    right: 76px;
+    opacity: 0;
+}
+
+
 
 #counterAvatar {
     width: 72px;
     height: 68px;
     bottom: 0px;
     right: 0px;
+    opacity: 0;
+}
+
+#dogAvatar{
+    width: 70px;
+    height: 63px;
+    bottom: 1px;
+    right: 9px;
     opacity: 0;
 }
 
@@ -102,13 +119,13 @@ body {
     transition: all 1s ease-in-out;
 }
 
-#chest {
+ #chest {
     width: 23px;
     height: 16px;
     left: 541px;
     top: 48px;
     transition: opacity 0.5s ease;
- }
+ } 
 
 
 #well {
@@ -125,7 +142,13 @@ body {
     left: 179px;
     top: 151px;
 }
-
+#dog{
+    width: 71px;
+    height: 71px;
+    left: 33px;
+    top: 281px;
+    opacity: 1;
+}
 #statue {
     width: 32px;
     height: 40px;
@@ -142,7 +165,7 @@ body {
 
 }
 
-#tileMap {}
+
 
 .background {
     position: absolute;
@@ -167,3 +190,6 @@ body {
     cursor: default;
     transition: all 1s ease-in-out;
 }
+
+
+
