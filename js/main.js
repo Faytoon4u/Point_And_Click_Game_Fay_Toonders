@@ -10,13 +10,19 @@ let gameState = {
     "keyPickedUp": false
 }
 
+// reset savegame. comment this out to use savegame:
+localStorage.removeItem("gameState");
 
+// does browser understand localSorage?
 if (Storage) {
+    // anything already saved?
     if (localStorage.gameState) {
+        // load savegame
         // uses localStorage gamestate string and convert it into an object. then store it into gameState.
         gameState =  JSON.parse(localStorage.gameState); 
 
     } else {
+        //create savegame
         // convert local object variable to a string. then store it into localstorage
         localStorage.setItem("gameState", JSON.stringify(gameState))
     }
@@ -45,7 +51,13 @@ const counterAvatar = document.getElementById("counterAvatar");
 //Objects
 const tree1 = document.getElementById("squareTree");
 
+// change stuff according to gamestate
+if(gameState.keyPickedUp) {
+    document.getElementById("key").remove();
+}
 
+
+updateInventory(gameState.inventory, inventoryList);
 gameWindow.onclick = function (e) {
     var rect = gameWindow.getBoundingClientRect();
     var x = e.clientX - rect.left;
@@ -63,7 +75,7 @@ gameWindow.onclick = function (e) {
             case "key":
                 console.log("pick up key")
                 document.getElementById("key").remove();
-                changeInventory('key', "add");
+                changeInventory('key', "add",'chest');
                 gameState.keyPickedUp = true
                 saveGameState(gameState);
                 break;
@@ -89,30 +101,70 @@ gameWindow.onclick = function (e) {
                 }
                 break;
             case "statue":
-                showMessage(heroSpeech, "Hey a statue.. Looks okay.", heroAudio);
+                showMessage(heroSpeech, "Hey a snowman.. Looks okay.", heroAudio);
                 setTimeout(function () { counterAvatar.style.opacity = 1; }, 4 * sec);
                 setTimeout(showMessage, 4.1 * sec, counsterSpeech, "I can talk you know..", counterAudio);
                 setTimeout(showMessage, 8.1 * sec, heroSpeech, "Wait what? That's not normal", heroAudio);
-                setTimeout(showMessage, 12.1 * sec, counsterSpeech, "Just shut up.. You want a key.. Check the graves.", counterAudio);
+                setTimeout(showMessage, 12.1 * sec, counsterSpeech, "Just shut up.. You want a key.. Check the forest.", counterAudio);
                 setTimeout(function () { counterAvatar.style.opacity = 0; }, 16 * sec);
                 //console.log("hey you.. wanna know where the key is? It's by the graves.");
                 break;
+                case "chest":
+                    if (gameState.keyPickedUp) {
+                        console.log("open chest");
+                        changeInventory('treasure', "add");
+                        document.getElementById("chest").remove();
+                    } else {
+                        console.log("pick up key");
+                        document.getElementById("key").remove();
+                        gameState.keyPickedUp = true;
+                        saveGameState(gameState);
+                        changeInventory('key', "add"); // add key to inventory here
+                    }
+                    break;
+                    
             default:
                 break;
         }
     }
 }
 
+
+
 /**
  * Add or remove item in inventory
  * @param {string} itemName 
  * @param {string} action 
  */
-function changeInventory(itemName, action) {
-    if (itemName == null || action == null) {
+// function changeInventory(itemName, action) {
+//     if (itemName == null || action == null) {
+//         console.error("Wrong parameters given to changeInventory()");
+//         return;
+//     }
+function changeInventory(itemName, action, imageId) {
+    if (itemName == null || action == null || imageId == null) {
         console.error("Wrong parameters given to changeInventory()");
         return;
     }
+
+    switch (action) {
+        case 'add':
+            gameState.inventory.push(itemName);
+            break;
+        case 'remove':
+            gameState.inventory = gameState.inventory.filter(function (newInventory) {
+                return newInventory !== itemName;
+            });
+            document.getElementById("inv-" + itemName).remove();
+            break;
+
+    }
+    updateInventory(gameState.inventory, inventoryList);
+
+    if (imageId) {
+        document.getElementById(imageId).style.opacity = '0';
+    }
+
 
     switch (action) {
         case 'add':
